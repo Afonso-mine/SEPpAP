@@ -30,13 +30,13 @@ public class RUSLEApp extends Application {
         root.getChildren().add(createOutputRow());
         progressBar.setVisible(false);
         progressBar.setPrefWidth(400);
-        Button run = new Button("Run RUSLE");
+        Button run = new Button("Calculate Soil Erosion");
         run.setStyle("-fx-font-size: 16px; -fx-padding: 10;");
         run.setMaxWidth(Double.MAX_VALUE);
         run.setOnAction(e -> runModel());
         root.getChildren().addAll(progressBar, run);
         Scene scene = new Scene(root, 750, 450);
-        stage.setTitle("raster soil erosion calculator");
+        stage.setTitle("SEPpAP");
         stage.setScene(scene);
         stage.show();
     }
@@ -46,7 +46,12 @@ public class RUSLEApp extends Application {
 
         Button browse = new Button("Browse");
         browse.setOnAction(e -> {
+            File homeDir = new File(System.getProperty("user.home"));
+            if (! homeDir.exists()) {
+                homeDir.mkdirs();
+            };
             FileChooser fc = new FileChooser();
+            fc.setInitialDirectory(new File(System.getProperty("user.home")));
             fc.setTitle("Select Raster");
             fc.getExtensionFilters().add(
                 new FileChooser.ExtensionFilter("GeoTIFF", "*.tif", "*.tiff")
@@ -76,12 +81,17 @@ public class RUSLEApp extends Application {
     }
 
     private HBox createOutputRow() {
-        Label label = new Label("Output Raster");
+        Label label = new Label("Calculated Raster");
         label.setPrefWidth(250);
 
         Button save = new Button("Save As");
         save.setOnAction(e -> {
+            File homeDir = new File(System.getProperty("user.home"));
+            if (! homeDir.exists()) {
+                homeDir.mkdirs();
+            };
             FileChooser fc = new FileChooser();
+            fc.setInitialDirectory(new File(System.getProperty("user.home")));
             fc.setTitle("Save Output Raster");
             fc.getExtensionFilters().add(
                 new FileChooser.ExtensionFilter("GeoTIFF", "*.tif")
@@ -97,7 +107,6 @@ public class RUSLEApp extends Application {
     }
 
     private void runModel() {
-
         if (rField.getText().isEmpty() ||
             kField.getText().isEmpty() ||
             lsField.getText().isEmpty() ||
