@@ -1,10 +1,10 @@
 [package]
-name = "rusle_rust"
-version = "0.1.0"
+name = "soil_erosion_calculator"
+version = "0.2.82"
 edition = "2021"
 
 [lib]
-name = "rusle_rust"
+name = "soil_erosion_calculator"
 crate-type = ["cdylib"]
 
 [dependencies]

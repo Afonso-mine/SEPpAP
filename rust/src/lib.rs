@@ -22,7 +22,7 @@ fn compute_rusle(
 }
 
 #[pymodule]
-fn rusle_rust(_py: Python, m: &PyModule) -> PyResult<()> {
+fn soil_erosion_calculator(_py: Python, m: &PyModule) -> PyResult<()> {
     m.add_function(wrap_pyfunction!(compute_rusle, m)?)?;
     Ok(())
 }
